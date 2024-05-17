@@ -4,7 +4,11 @@ namespace la_mia_pizzeria_crud_mvc.Data
 {
     public static class PizzaManager
     {
-
+        public static int CountPizzas()
+        {
+            using PizzaContext db = new PizzaContext();
+            return db.Pizzas.Count();
+        }
         public static List<Pizza> GetAllPizza()
         {
             using PizzaContext db = new PizzaContext();
@@ -52,6 +56,18 @@ namespace la_mia_pizzeria_crud_mvc.Data
             db.SaveChanges();
 
             return true;
+        }
+
+        public static void Seed()
+        {
+            if(PizzaManager.CountPizzas() == 0)
+            {
+               PizzaManager.AddPizza(new Pizza("Bufala", "Pomodoro, Mozzarella di Bufala", "bufala.jfif", 10));
+               PizzaManager.AddPizza(new Pizza("Diavola", "Pomodoro, Mozzarella di Bufala, Salame", "diavola.jpg", 8));
+               PizzaManager.AddPizza(new Pizza("Funghi", "Pomodoro, Funghi", "funghi.jfif", 8));
+               PizzaManager.AddPizza(new Pizza("Zucchine", "Zucchine, Mozzarella", "zucchine.jfif", 9));
+               PizzaManager.AddPizza(new Pizza("Boscaiola", "Pomodoro, Mozzarella, Funghi", "boscaiola.jpg", 11));
+            }
         }
         //public static List<Pizza> ListPizza = new List<Pizza>();
         //public static Pizza CreatePizza(string name, string description, string image, decimal price)

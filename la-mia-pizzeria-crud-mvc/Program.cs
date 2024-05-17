@@ -26,4 +26,5 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Pizza}/{action=Index}/{id?}");
 
+PizzaManager.Seed();
 app.Run();
