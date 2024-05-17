@@ -43,12 +43,12 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
             }
 
             PizzaManager.AddPizza(data);
-            using (PizzaContext db = new PizzaContext())
-            {
-                var pizza = new Pizza(data.Name, data.Description, data.Image, data.Price);
-                db.Pizzas.Add(pizza);
-                db.SaveChanges();
-            }
+            //using (PizzaContext db = new PizzaContext())
+            //{
+            //    var pizza = new Pizza(data.Name, data.Description, data.Image, data.Price);
+            //    db.Pizzas.Add(pizza);
+            //    db.SaveChanges();
+            //}
             return RedirectToAction("Index");
         }
 
