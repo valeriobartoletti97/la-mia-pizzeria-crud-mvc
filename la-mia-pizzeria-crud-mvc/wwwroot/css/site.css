@@ -79,18 +79,18 @@ h2 {
     background-color: black;
     color: white;
 }
-.show-icon {
+.show-icon , .update-icon{
     background-color: white;
     color: black;
 }
-.shop-icon ,.show-icon, .go-back-icon{
+.shop-icon ,.show-icon, .go-back-icon , .update-icon{
    
     padding: 7px;
     border-radius: 2px;
     font-size: 1.05em
 }
 
-    .shop-icon:hover , .show-icon:hover, .go-back-icon:hover{
+    .shop-icon:hover , .show-icon:hover, .go-back-icon:hover , .update-icon:hover{
         transform: scale(1.05);
         transition: 1s;
         cursor: pointer;

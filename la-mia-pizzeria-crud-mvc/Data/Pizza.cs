@@ -7,10 +7,10 @@ namespace la_mia_pizzeria_crud_mvc.Data
         [Key] public int Id { get; set; }
 
         [Required(ErrorMessage = "Il campo è obbligatorio")]
-        [StringLength(30, MinimumLength = 3, ErrorMessage = "Il nome deve essere tra 3 e 30 caratteri")]
+        [StringLength(30, MinimumLength = 3, ErrorMessage = "Il nome deve contenere tra i 3 e i 30 caratteri")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Il campo è obbligatorio")]
-        [StringLength(1000, MinimumLength = 5, ErrorMessage = "La descrizione deve essere tra i 5 e i 1000 caratteri")]
+        [StringLength(1000, MinimumLength = 5, ErrorMessage = "La descrizione deve contenere tra i 5 e i 1000 caratteri")]
         public string Description { get; set; }
         public string? Image { get; set; }
 

@@ -5,7 +5,7 @@
     <h2 class="text-uppercase fw-bold">Pizze</h2>
 </div>
 <div class="container my-bg pb-3" id="main-content">
-    <div class="row justify-content-between ">
+    <div class="row justify-content-center gap-4">
         @* Pizza cards *@
         @{
             foreach (Pizza pizza in @Model)
@@ -25,12 +25,17 @@
                                 @pizza.Price&euro;
                             </span>
                             <div class="d-flex gap-1">
-                                <span class="d-block">
+                                <span>
                                     <i class="fa-solid fa-cart-shopping shop-icon"></i>
                                 </span>
-                                <span class="d-block">
+                                <span>
                                     <a href="@Url.Action("GetPizza", "Pizza", new { id = pizza.Id})">
                                         <i class="fa-solid fa-eye show-icon"></i>
+                                    </a>
+                                </span>
+                                <span>
+                                    <a href="@Url.Action("Update", "Pizza", new { id = pizza.Id})">
+                                        <i class="fa-solid fa-pen update-icon"></i>
                                     </a>
                                 </span>
                             </div>
@@ -40,7 +45,7 @@
             }
         }
         <div class="d-flex justify-content-center mt-5 ">
-            <a href="@Url.Action("Create", "Pizza")">Inserisci nuova pizza</a>
+            <a href="@Url.Action("Create", "Pizza")" class="btn btn-small btn-light text-uppercase fw-bold">Inserisci nuova pizza</a>
         </div>
     </div>
 </div>
