@@ -95,6 +95,16 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
             
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            if (PizzaManager.DeletePizza(id))
+                return RedirectToAction("Index");
+            else
+                return NotFound();
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

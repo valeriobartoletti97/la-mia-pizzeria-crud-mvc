@@ -39,6 +39,20 @@ namespace la_mia_pizzeria_crud_mvc.Data
 
             return true;
         }
+
+        public static bool DeletePizza(int id)
+        {
+            using PizzaContext db = new PizzaContext();
+            var pizza = PizzaManager.GetPizza(id);
+
+            if (pizza == null)
+                return false;
+
+            db.Pizzas.Remove(pizza);
+            db.SaveChanges();
+
+            return true;
+        }
         //public static List<Pizza> ListPizza = new List<Pizza>();
         //public static Pizza CreatePizza(string name, string description, string image, decimal price)
         //{

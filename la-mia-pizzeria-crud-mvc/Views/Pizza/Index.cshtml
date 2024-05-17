@@ -41,6 +41,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="delete-pizza-btn position-absolute">
+                        <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id" method="post">
+                            @Html.AntiForgeryToken()
+                            <button type="submit">
+                                <i class="fa-solid fa-trash delete-icon"></i>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             }
         }
