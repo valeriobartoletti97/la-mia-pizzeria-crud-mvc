@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace la_mia_pizzeria_crud_mvc.Data
 {
@@ -16,6 +17,10 @@ namespace la_mia_pizzeria_crud_mvc.Data
 
         [Required(ErrorMessage = "Il campo è obbligatorio")]
         public decimal Price { get; set; }
+
+        public int? CategoryId { get; set; }
+
+        public Category? Category { get; set; }
 
         public Pizza(string name, string description, string image, decimal price)
         {

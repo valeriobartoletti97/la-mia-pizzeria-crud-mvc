@@ -57,6 +57,11 @@ namespace la_mia_pizzeria_crud_mvc.Data
 
             return true;
         }
+        public static List<Category> GetAllCategories()
+        {
+            using PizzaContext db = new PizzaContext();
+            return db.Categories.ToList();
+        }
 
         public static void Seed()
         {

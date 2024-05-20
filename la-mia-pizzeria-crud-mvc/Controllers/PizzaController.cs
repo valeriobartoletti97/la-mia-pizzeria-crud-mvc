@@ -28,12 +28,18 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            using (PizzaContext context = new PizzaContext())
+            {
+                PizzaFormModel  model= new PizzaFormModel();
+                model.Pizza = new Pizza();
+                model.Categories = PizzaManager.GetAllCategories();
+                return View(model);
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Pizza data)
+        public IActionResult Create(PizzaFormModel data)
         {
             if (!ModelState.IsValid)
             {
@@ -42,7 +48,7 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
                 return View("Create", data);
             }
 
-            PizzaManager.AddPizza(data);
+            PizzaManager.AddPizza(data.Pizza);
             //using (PizzaContext db = new PizzaContext())
             //{
             //    var pizza = new Pizza(data.Name, data.Description, data.Image, data.Price);
