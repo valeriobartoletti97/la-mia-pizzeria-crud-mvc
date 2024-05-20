@@ -69,13 +69,14 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
                 }
                 else
                 {
-                    return View(pizzaToEdit);
+                    PizzaFormModel model = new PizzaFormModel(pizzaToEdit, PizzaManager.GetAllCategories());
+                    return View(model);
                 }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update(int id, Pizza data)
+        public IActionResult Update(int id, PizzaFormModel data)
         {
             if (!ModelState.IsValid)
             {
@@ -85,10 +86,11 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
             //Modifica con lambda function
             bool result = PizzaManager.UpdatePizza(id, pizza =>
             {
-                pizza.Name = data.Name;
-                pizza.Description = data.Description;
-                pizza.Image = data.Image;
-                pizza.Price = data.Price;
+                pizza.Name = data.Pizza.Name;
+                pizza.Description = data.Pizza.Description;
+                pizza.Image = data.Pizza.Image;
+                pizza.Price = data.Pizza.Price;
+                pizza.CategoryId = data.Pizza.CategoryId;
             });
             if (result)
             {

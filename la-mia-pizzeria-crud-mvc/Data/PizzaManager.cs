@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace la_mia_pizzeria_crud_mvc.Data
 {
@@ -15,10 +16,12 @@ namespace la_mia_pizzeria_crud_mvc.Data
             return db.Pizzas.ToList();
         }
 
-        public static Pizza GetPizza(int id)
+        public static Pizza GetPizza(int id, bool WithCategories = true)
         {
             using PizzaContext db = new PizzaContext();
-            return db.Pizzas.FirstOrDefault(p  => p.Id == id);
+            if(WithCategories)
+                return db.Pizzas.Where(p => p.Id == id).Include(p => p.Category).FirstOrDefault();
+            return db.Pizzas.FirstOrDefault(p => p.Id == id);
         }
 
         public static void AddPizza(Pizza pizza)

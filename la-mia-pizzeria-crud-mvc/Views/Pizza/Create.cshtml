@@ -19,7 +19,7 @@
             <span asp-validation-for="@Model.Pizza.Image" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <strong>Sport:</strong>
+            <strong>Categpria:</strong>
             <select asp-for="@Model.Pizza.CategoryId" class="form-control" rows="10" class="d-block w-100">
                 <option value=""></option>
                 @foreach (Category category in Model.Categories)
