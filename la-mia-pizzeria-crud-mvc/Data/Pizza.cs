@@ -22,6 +22,8 @@ namespace la_mia_pizzeria_crud_mvc.Data
 
         public Category? Category { get; set; }
 
+        public List<Ingredient>? Ingredients { get; set; }
+
         public Pizza(string name, string description, string image, decimal price)
         {
             Name = name;
