@@ -1,5 +1,6 @@
 ﻿using la_mia_pizzeria_crud_mvc.Data;
 using la_mia_pizzeria_crud_mvc.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using System.Diagnostics;
@@ -15,16 +16,20 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles ="Admin,User")]
         public IActionResult Index()
         {
             return View(PizzaManager.GetAllPizza());
         }
+
+        [Authorize(Roles = "Admin,User")]
 
         public IActionResult GetPizza(int id)
         {
             return View(PizzaManager.GetPizza(id));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Create()
         {
@@ -38,6 +43,7 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(PizzaFormModel data)
@@ -61,6 +67,7 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IActionResult Update(int id)
         {
@@ -79,6 +86,7 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
                 }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Update(int id, PizzaFormModel data)
@@ -118,6 +126,7 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)

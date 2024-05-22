@@ -39,17 +39,23 @@
                                         <span class="d-block">
                                             <i class="fa-solid fa-cart-shopping shop-icon"></i>
                                         </span>
-                                        <span>
-                                            <a href="@Url.Action("Update", "Pizza", new { id = Model.Id})">
-                                                <i class="fa-solid fa-pen update-icon"></i>
-                                            </a>
-                                        </span>
-                                        <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@Model.Id" method="post">
-                                            @Html.AntiForgeryToken()
-                                            <button type="submit">
-                                                <i class="fa-solid fa-trash delete-icon"></i>
-                                            </button>
-                                        </form>
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <span>
+                                                <a href="@Url.Action("Update", "Pizza", new { id = Model.Id})">
+                                                    <i class="fa-solid fa-pen update-icon"></i>
+                                                </a>
+                                            </span>
+                                        }
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@Model.Id" method="post">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit">
+                                                    <i class="fa-solid fa-trash delete-icon"></i>
+                                                </button>
+                                            </form>
+                                        }
                                     </div>
                                 </div>
                             </div>

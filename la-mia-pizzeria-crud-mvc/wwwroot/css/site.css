@@ -170,3 +170,9 @@ button{
     top:10px;
     right:10px;
 }
+main{
+    padding: 0 10px;
+}
+.navbar-collapse{
+    flex-grow:0;
+}
