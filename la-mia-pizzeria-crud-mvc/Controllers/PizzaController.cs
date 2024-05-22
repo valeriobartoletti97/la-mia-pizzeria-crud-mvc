@@ -33,6 +33,7 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
                 PizzaFormModel  model= new PizzaFormModel();
                 model.Pizza = new Pizza();
                 model.Categories = PizzaManager.GetAllCategories();
+                model.CreateIngredients();
                 return View(model);
             }
         }
@@ -45,10 +46,12 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
             {
                 // Ritorniamo "data" alla view così che la form abbia di nuovo i dati inseriti
                 // (anche se erronei)
+                data.Categories = PizzaManager.GetAllCategories();
+                data.CreateIngredients();
                 return View("Create", data);
             }
 
-            PizzaManager.AddPizza(data.Pizza);
+            PizzaManager.AddPizza(data.Pizza, data.SelectedIngredients);
             //using (PizzaContext db = new PizzaContext())
             //{
             //    var pizza = new Pizza(data.Name, data.Description, data.Image, data.Price);
@@ -69,7 +72,9 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
                 }
                 else
                 {
+
                     PizzaFormModel model = new PizzaFormModel(pizzaToEdit, PizzaManager.GetAllCategories());
+                    model.CreateIngredients();
                     return View(model);
                 }
         }
@@ -80,27 +85,37 @@ namespace la_mia_pizzeria_crud_mvc.Controllers
         {
             if (!ModelState.IsValid)
             {
+                data.Categories = PizzaManager.GetAllCategories();
+                data.CreateIngredients();
                 return View("Update", data);
             }
-
-            //Modifica con lambda function
-            bool result = PizzaManager.UpdatePizza(id, pizza =>
+            var modified = PizzaManager.UpdatePizza(id, data.Pizza, data.SelectedIngredients);
+            if (modified)
             {
-                pizza.Name = data.Pizza.Name;
-                pizza.Description = data.Pizza.Description;
-                pizza.Image = data.Pizza.Image;
-                pizza.Price = data.Pizza.Price;
-                pizza.CategoryId = data.Pizza.CategoryId;
-            });
-            if (result)
-            {
+                // Richiamiamo la action Index affinché vengano mostrate tutte le pizze
                 return RedirectToAction("Index");
             }
             else
-            {
                 return NotFound();
-            }
-            
+
+            //Modifica con lambda function
+            //bool result = PizzaManager.UpdatePizza(id, pizza =>
+            //{
+            //    pizza.Name = data.Pizza.Name;
+            //    pizza.Description = data.Pizza.Description;
+            //    pizza.Image = data.Pizza.Image;
+            //    pizza.Price = data.Pizza.Price;
+            //    pizza.CategoryId = data.Pizza.CategoryId;
+            //});
+            //if (result)
+            //{
+            //    return RedirectToAction("Index");
+            //}
+            //else
+            //{
+            //    return NotFound();
+            //}
+
         }
 
         [HttpPost]

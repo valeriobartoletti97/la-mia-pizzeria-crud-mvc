@@ -19,7 +19,7 @@
             <span asp-validation-for="@Model.Pizza.Image" class="text-danger"></span>
         </div>
         <div class="mb-3">
-            <strong>Categpria:</strong>
+            <strong>Categoria:</strong>
             <select asp-for="@Model.Pizza.CategoryId" class="form-control" rows="10" class="d-block w-100">
                 <option value=""></option>
                 @foreach (Category category in Model.Categories)
@@ -34,6 +34,17 @@
                     }
                 }
             </select>
+        </div>
+        <div class="mb-3">
+            <strong>Ingredienti:</strong>
+            @for ( int i = 0; i <Model.Ingredients.Count; i++)
+            {
+                <div>
+                    <input type ="checkbox" name="SelectedIngredients" value="@Model.Ingredients[i].Value" 
+                    @(Model.SelectedIngredients.Contains(Model.Ingredients[i].Value)? "checked" : "")/>
+                    @Model.Ingredients[i].Text
+                </div>
+            }
         </div>
         <div class="mb-3">
             <strong>Prezzo:</strong>
